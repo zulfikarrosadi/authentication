@@ -1,0 +1,20 @@
+### Create new user
+POST http://localhost:3000/api/register HTTP/1.1
+Content-Type:  application/json
+
+{
+  "username": "",
+  "password": "admin123asd",
+  "passwordConfirmation": "admin123"
+}
+
+### Get User By Id
+GET http://localhost:3000/api/users/1 HTTP/1.1
+
+### Login
+POST http://localhost:3000/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+
+}
