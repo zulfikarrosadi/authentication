@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const createUserSchema = z
   .object({
-    username: z.string().min(1, 'username is required'),
+    username: z.string().min(6, 'username should have minimum 6 characters'),
     password: z.string().min(1, 'password is required'),
     passwordConfirmation: z
       .string({ required_error: 'password confirmation is required' })
