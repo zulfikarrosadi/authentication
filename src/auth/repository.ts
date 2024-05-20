@@ -39,3 +39,22 @@ export async function saveTokenToDb(token: string, userId: number) {
     return error;
   }
 }
+
+export async function getTokenByUserId(
+  userId: number,
+): Promise<string | Error> {
+  try {
+    const [rows] = await pool.query<RowDataPacket[]>(
+      'SELECT refresh_token FROM users WHERE id = ?',
+      [userId],
+    );
+    if (!rows.length) {
+      throw new Error('invalid request');
+    }
+
+    return rows[0]['refresh_token'] as string;
+  } catch (error: any) {
+    console.log('get_token_by_user_id', error.message);
+    return error;
+  }
+}
