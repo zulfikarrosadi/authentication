@@ -23,3 +23,19 @@ export async function getUserByUsername(data: {
     return error;
   }
 }
+
+export async function saveTokenToDb(token: string, userId: number) {
+  try {
+    const [rows] = await pool.execute(
+      'UPDATE users SET refresh_token = ? WHERE id = ?',
+      [token, userId],
+    );
+
+    console.log('save_token_to_db', rows);
+
+    return rows;
+  } catch (error: any) {
+    console.log('save_token_to_db', error.message);
+    return error;
+  }
+}
