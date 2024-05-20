@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import { getUser, registerUser } from './user/handler';
+import { getUser, registerUser, getCurrentUser } from './user/handler';
 import { login, refreshToken } from './auth/handler';
 import { validateInput } from './middlewares/validateInput';
 import { createUserSchema } from './user/schema';
@@ -14,5 +14,6 @@ export default function routes(app: Express) {
 
   app.use(deserializeToken);
   app.use(requiredLogin);
+  app.get('/api/users', getCurrentUser);
   app.get('/api/users/:id', getUser);
 }
