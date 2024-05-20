@@ -39,7 +39,7 @@ export async function login(
       userId: user.id,
       expiration: refreshTokenMaxAge,
     });
-
+    await saveTokenToDb(refreshToken, user.id);
     return res
       .status(200)
       .cookie('accessToken', accessToken, {
