@@ -84,6 +84,12 @@ export async function refreshToken(req: Request, res: Response<ApiResponse>) {
     if (!decodedData) {
       throw new Error('invalid refresh token signature');
     }
+
+    const tokenFromDb = await getTokenByUserId(decodedData.userId);
+    if (refreshToken !== tokenFromDb) {
+      throw new Error('refresh token is invalid');
+    }
+
     const newAccessToken = createNewToken({
       userId: decodedData.userId,
       username: decodedData.username,
