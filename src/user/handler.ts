@@ -106,3 +106,12 @@ export async function getUser(
       .json({ status: 'fail', errors: { code: 404, message: error.message } });
   }
 }
+
+export async function getCurrentUser(
+  req: Request,
+  res: Response<ApiResponse, { user: { username: string; userId: number } }>,
+) {
+  return res
+    .status(200)
+    .json({ status: 'success', data: { user: { ...res.locals.user } } });
+}
