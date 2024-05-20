@@ -23,7 +23,7 @@ export function validateInput(schema: AnyZodObject) {
                 [e.path[0]]: e.message,
               };
             })
-            .reduce((acc, curr) => {
+            .reduce((acc: any, curr: any) => {
               Object.assign(acc, curr);
               return acc;
             }, {}),
