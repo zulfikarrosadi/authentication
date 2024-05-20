@@ -7,6 +7,7 @@ import {
   createNewToken,
   refreshTokenMaxAge,
 } from '../utils/token';
+import { saveTokenToDb } from '../auth/repository';
 
 export async function registerUser(
   req: Request<{}, {}, { username: string; password: string }>,
@@ -38,7 +39,7 @@ export async function registerUser(
       userId: user.id,
       expiration: refreshTokenMaxAge,
     });
-
+    await saveTokenToDb(refreshToken, user.id);
     return res
       .status(201)
       .cookie('accessToken', accessToken, {
